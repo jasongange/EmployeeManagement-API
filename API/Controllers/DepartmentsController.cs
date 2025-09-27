@@ -34,7 +34,7 @@ namespace API.Controllers
         }
 
         /// <summary>
-        /// Gets the paginated result of employees.
+        /// Gets the paginated result of departments.
         /// </summary>
         [HttpGet("GetPaginatedDepartments")]
         public async Task<PaginatedResultDto<DepartmentResponseDto>> GetPaginatedDepartmentsAsync(int skip, int limit)
