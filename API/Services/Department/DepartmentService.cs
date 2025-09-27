@@ -2,19 +2,31 @@
 using AutoMapper;
 using Persistence.Repositories;
 
-namespace UserManagementAPI.Services
+namespace API.Services.Department
 {
+    /// <summary>
+    /// Manages department service.
+    /// </summary>
+    /// <seealso cref="IDepartmentService" />
     public class DepartmentService : IDepartmentService
     {
         private readonly IDepartmentRepository departmentRepository;
         private readonly IMapper mapper;
 
+        /// <summary>
+        /// Creates an instance of <see cref="DepartmentService"/>
+        /// </summary>
+        /// <param name="departmentRepository">The department repository.</param>
+        /// <param name="mapper">The mapper.</param>
         public DepartmentService(IDepartmentRepository departmentRepository, IMapper mapper)
         {
             this.departmentRepository = departmentRepository;
             this.mapper = mapper;
         }
 
+        /// <summary>
+        /// <seealso cref="IDepartmentService.GetAllDepartmentsAsync"/>
+        /// </summary
         public async Task<IEnumerable<DepartmentResponseDto>> GetAllDepartmentsAsync()
         {
             var departments = departmentRepository.GetAll();

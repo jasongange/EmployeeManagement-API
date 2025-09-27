@@ -1,8 +1,9 @@
-﻿using Domain;
-
-namespace Persistence.Repositories.User
+﻿namespace Persistence.Repositories.Employee
 {
-    public interface IEmployeeRepository : IRepository<Employee>
+    /// <summary>
+    /// Manages the employee repository
+    /// </summary>
+    public interface IEmployeeRepository : IRepository<Domain.Employee>
     {
     }
 }

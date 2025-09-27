@@ -5,29 +5,48 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace UserManagementAPI.Controllers
 {
+    /// <summary>
+    /// The web endpoints for managing the employee
+    /// </summary>
+    /// <seealso cref="ControllerBase" />
     [ApiController]
     [Route("[controller]")]
     public class EmployeesController : ControllerBase
     {
         private readonly IEmployeeService employeeService;
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="EmployeesController" /> class.
+        /// </summary>
+        /// <param name="employeeService">The employee service.</param>
         public EmployeesController(IEmployeeService employeeService)
         {
             this.employeeService = employeeService;
         }
 
+        /// <summary>
+        /// Gets the employees.
+        /// </summary>
         [HttpGet]
         public async Task<IEnumerable<EmployeeResponseDto>> GetAllEmployeesAsync()
         {
             return await employeeService.GetAllEmployeesAsync();
         }
 
+        /// <summary>
+        /// Gets the employee by identifier.
+        /// </summary>
+        /// <param name="id">The identifier of the employee.</param>
         [HttpGet("{id}")]
         public async Task<EmployeeResponseDto> GetEmployeeByIdAsync(string id)
         {
             return await employeeService.GetEmployeeByIdAsync(id);
         }
 
+        /// <summary>
+        /// Creates the employee.
+        /// </summary>
+        /// <param name="request">The employee request DTO.</param>
         [HttpPost]
         public async Task<IActionResult> CreateEmployeeAsync(EmployeeRequestDto request)
         {
@@ -35,6 +54,11 @@ namespace UserManagementAPI.Controllers
             return Ok(result);
         }
 
+        /// <summary>
+        /// Updates the employee.
+        /// </summary>
+        /// <param name="id">The identifier of the employee.</param>
+        /// <param name="request">The employee request DTO.</param>
         [HttpPut("{id}")]
         public async Task<IActionResult> UpdateEmployeeAsync(string id, EmployeeRequestDto request)
         {
@@ -47,6 +71,10 @@ namespace UserManagementAPI.Controllers
             return Ok(result);
         }
 
+        /// <summary>
+        /// Deletes the employee.
+        /// </summary>
+        /// <param name="id">The identifier of the employee.</param>
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteEmployeeAsync(string id)
         {

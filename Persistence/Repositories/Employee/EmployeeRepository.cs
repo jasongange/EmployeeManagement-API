@@ -1,14 +1,20 @@
-﻿using Domain;
-using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.EntityFrameworkCore;
 
-namespace Persistence.Repositories.User
+namespace Persistence.Repositories.Employee
 {
-    public class EmployeeRepository : Repository<Employee>, IEmployeeRepository
+    /// <summary>
+    /// Manages employee repository.
+    /// </summary>
+    /// <seealso cref="IEmployeeRepository" />
+    public class EmployeeRepository : Repository<Domain.Employee>, IEmployeeRepository
     {
         public EmployeeRepository(EmployeeDbContext context)
             : base(context) { }
 
-        public IQueryable<Employee> GetAll()
+        /// <summary>
+        /// Manages retrieving the employees.
+        /// </summary>
+        public IQueryable<Domain.Employee> GetAll()
         {
             return context.Employee.Include(d => d.Department).AsQueryable();
         }

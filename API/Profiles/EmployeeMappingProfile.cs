@@ -5,6 +5,10 @@ using Domain;
 
 namespace UserManagementAPI.Profiles
 {
+    /// <summary>
+    /// The employee mapper profile
+    /// </summary>
+    /// <seealso cref="Profile" />
     public class EmployeeMappingProfile : Profile
     {
         public EmployeeMappingProfile()

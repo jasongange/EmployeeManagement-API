@@ -3,6 +3,9 @@ using Microsoft.EntityFrameworkCore;
 
 namespace Persistence
 {
+    /// <summary>
+    /// Manages employeeDb context.
+    /// </summary>
     public class EmployeeDbContext : DbContext
     {
         public EmployeeDbContext(DbContextOptions<EmployeeDbContext> options) : base(options) { }
