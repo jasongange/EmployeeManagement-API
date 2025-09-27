@@ -1,4 +1,5 @@
 ﻿using API.DTOs.Response;
+using API.DTOs.Shared;
 using AutoMapper;
 using Persistence.Repositories;
 
@@ -31,6 +32,17 @@ namespace API.Services.Department
         {
             var departments = departmentRepository.GetAll();
             var response = mapper.Map<IEnumerable<DepartmentResponseDto>>(departments);
+
+            return response;
+        }
+
+        /// <summary>
+        /// <seealso cref="IDepartmentService.GetPaginatedDepartmentsAsync(int, int)"/>
+        /// </summary>
+        public async Task<PaginatedResultDto<DepartmentResponseDto>> GetPaginatedDepartmentsAsync(int skip, int limit)
+        {
+            var result = await departmentRepository.GetPaginatedDepartmentsAsync(skip, limit);
+            var response = mapper.Map<PaginatedResultDto<DepartmentResponseDto>>(result);
 
             return response;
         }

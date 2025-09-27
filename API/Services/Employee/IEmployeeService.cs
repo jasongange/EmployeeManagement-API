@@ -1,5 +1,6 @@
 ﻿using API.DTOs.Request;
 using API.DTOs.Response;
+using API.DTOs.Shared;
 
 namespace API.Services.Employee
 {
@@ -8,11 +9,6 @@ namespace API.Services.Employee
     /// </summary>
     public interface IEmployeeService
     {
-        /// <summary>
-        /// Retrieving all of the employees
-        /// </summary>
-        Task<IEnumerable<EmployeeResponseDto>> GetAllEmployeesAsync();
-
         /// <summary>
         /// Retrieve employee by identifier
         /// </summary>
@@ -37,5 +33,12 @@ namespace API.Services.Employee
         /// </summary>
         /// <param name="id">The identifier.</param>
         Task DeleteEmployeeAsync(string id);
+
+        /// <summary>
+        /// Retrieving paginated result of employees
+        /// </summary>
+        /// <param name="skip">The paging skip.</param>
+        /// <param name="limit">The paging limit.</param>
+        Task<PaginatedResultDto<EmployeeResponseDto>> GetPaginatedEmployeesAsync(int skip, int limit);
     }
 }
