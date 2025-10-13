@@ -1,10 +1,11 @@
 using API.DTOs.Request;
 using API.DTOs.Response;
+using API.DTOs.Shared;
 using API.Services.Employee;
 using Microsoft.AspNetCore.Mvc;
 //test
 
-namespace UserManagementAPI.Controllers
+namespace API.Controllers
 {
     /// <summary>
     /// The web endpoints for managing the employee
@@ -26,12 +27,12 @@ namespace UserManagementAPI.Controllers
         }
 
         /// <summary>
-        /// Gets the employees.
+        /// Gets the paginated result of employees.
         /// </summary>
-        [HttpGet]
-        public async Task<IEnumerable<EmployeeResponseDto>> GetAllEmployeesAsync()
+        [HttpGet("GetPaginatedEmployees")]
+        public async Task<PaginatedResultDto<EmployeeResponseDto>> GetPaginatedEmployeesAsync(int skip, int limit)
         {
-            return await employeeService.GetAllEmployeesAsync();
+            return await employeeService.GetPaginatedEmployeesAsync(skip, limit);
         }
 
         /// <summary>

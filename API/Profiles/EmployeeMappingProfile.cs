@@ -1,7 +1,9 @@
 ﻿using API.DTOs.Request;
 using API.DTOs.Response;
+using API.DTOs.Shared;
 using AutoMapper;
 using Domain;
+using Persistence.Paging;
 
 namespace UserManagementAPI.Profiles
 {
@@ -16,6 +18,7 @@ namespace UserManagementAPI.Profiles
             CreateMap<Employee, EmployeeResponseDto>()
                 .ForMember(dest => dest.Department, opt => opt.MapFrom(src => src.Department.Name));
             CreateMap<EmployeeRequestDto, Employee>();
+            CreateMap<PaginatedResult<Employee>, PaginatedResultDto<EmployeeResponseDto>>();
         }
     }
 }

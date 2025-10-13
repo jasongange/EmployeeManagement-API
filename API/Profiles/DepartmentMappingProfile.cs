@@ -1,6 +1,8 @@
 ﻿using API.DTOs.Response;
+using API.DTOs.Shared;
 using AutoMapper;
 using Domain;
+using Persistence.Paging;
 
 namespace API.Profiles
 {
@@ -13,6 +15,7 @@ namespace API.Profiles
         public DepartmentMappingProfile()
         {
             CreateMap<Department, DepartmentResponseDto>();
+            CreateMap<PaginatedResult<Department>, PaginatedResultDto<DepartmentResponseDto>>();
         }
     }
 }

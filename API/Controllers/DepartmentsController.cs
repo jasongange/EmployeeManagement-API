@@ -1,4 +1,5 @@
 using API.DTOs.Response;
+using API.DTOs.Shared;
 using API.Services.Department;
 using Microsoft.AspNetCore.Mvc;
 
@@ -26,10 +27,19 @@ namespace API.Controllers
         /// <summary>
         /// Gets the departments.
         /// </summary>
-        [HttpGet]
+        [HttpGet("GetDepartments")]
         public async Task<IEnumerable<DepartmentResponseDto>> GetAllDepartmentsAsync()
         {
             return await departmentService.GetAllDepartmentsAsync();
+        }
+
+        /// <summary>
+        /// Gets the paginated result of departments.
+        /// </summary>
+        [HttpGet("GetPaginatedDepartments")]
+        public async Task<PaginatedResultDto<DepartmentResponseDto>> GetPaginatedDepartmentsAsync(int skip, int limit)
+        {
+            return await departmentService.GetPaginatedDepartmentsAsync(skip, limit);
         }
     }
 }

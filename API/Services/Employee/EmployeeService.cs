@@ -1,5 +1,6 @@
 ﻿using API.DTOs.Request;
 using API.DTOs.Response;
+using API.DTOs.Shared;
 using AutoMapper;
 using Persistence.Repositories.Employee;
 
@@ -23,17 +24,6 @@ namespace API.Services.Employee
         {
             this.employeeRepository = employeeRepository;
             this.mapper = mapper;
-        }
-
-        /// <summary>
-        /// <seealso cref="IEmployeeService.GetAllEmployeesAsync"/>
-        /// </summary>
-        public async Task<IEnumerable<EmployeeResponseDto>> GetAllEmployeesAsync()
-        {
-            var employees = employeeRepository.GetAll();
-            var response = mapper.Map<IEnumerable<EmployeeResponseDto>>(employees);
-
-            return response;
         }
 
         /// <summary>
@@ -84,5 +74,16 @@ namespace API.Services.Employee
         /// <seealso cref="IEmployeeService.DeleteEmployeeAsync(string)"/>
         /// </summary>
         public Task DeleteEmployeeAsync(string id) => employeeRepository.DeleteAsync(id);
+
+        /// <summary>
+        /// <seealso cref="IEmployeeService.GetEmployeeByIdAsync(string)"/>
+        /// </summary>
+        public async Task<PaginatedResultDto<EmployeeResponseDto>> GetPaginatedEmployeesAsync(int skip, int limit)
+        {
+            var result = await employeeRepository.GetPaginatedEmployeesAsync(skip, limit);
+            var response = mapper.Map<PaginatedResultDto<EmployeeResponseDto>>(result);
+
+            return response;
+        }
     }
 }

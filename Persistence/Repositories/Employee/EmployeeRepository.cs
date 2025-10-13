@@ -1,4 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using Persistence.Paging;
 
 namespace Persistence.Repositories.Employee
 {
@@ -17,6 +18,26 @@ namespace Persistence.Repositories.Employee
         public IQueryable<Domain.Employee> GetAll()
         {
             return context.Employee.Include(d => d.Department).AsQueryable();
+        }
+
+        /// <summary>
+        /// <seealso cref="IEmployeeRepository.GetPaginatedEmployeesAsync(int, int)"/>
+        /// </summary>
+        public async Task<PaginatedResult<Domain.Employee>> GetPaginatedEmployeesAsync(int skip, int limit)
+        {
+            var employees = GetAll();
+            var totalCount = employees.Count();
+
+            var items = await employees
+                .Skip(skip)
+                .Take(limit)
+                .ToListAsync();
+
+            return new PaginatedResult<Domain.Employee>
+            {
+                TotalCount = totalCount,
+                Items = items
+            };
         }
     }
 }
